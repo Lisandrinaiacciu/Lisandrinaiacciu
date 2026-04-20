@@ -28,8 +28,7 @@ export default function Home() {
           />
           <h1>Choisissez des pièces de luxe à petit prix</h1>
           <p>
-            Découvrez notre séléction de pièces pour vous habiller comme vous le souhaitez à
-            petit prix.
+            Découvrez notre séléction de pièces dont vous rêver à prix de rêve.
           </p>
           <a className="btn" href="#produits">
             Voir les produits
