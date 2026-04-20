@@ -41,10 +41,12 @@ export default function Home() {
           <h2>Presentation</h2>
           <div className="presentation-grid">
             <article>
-              <h3>Notre histoire</h3>
+              <h3>Nos lives Whatnot</h3>
               <p>
-                Depuis 2018, nous proposons des produits utiles, durables et beaux. Notre
-                mission: rendre le style accessible sans compromis sur la qualite.
+                Depuis Janvier 2026 notre site internet est retranscrit trois fois par semaine
+                via des lives effectués sur Whatnot. Vous y trouverez les pièces présentées ci
+                dessous. N'hesitez pas à demander de passer une pièce qui vous interesse lors des
+                lives
               </p>
             </article>
             <article>
