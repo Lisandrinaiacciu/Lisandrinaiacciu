@@ -27,7 +27,7 @@ export default function Home() {
             height={430}
             priority
           />
-          <h1>L'elegance du quotidien, selectionnee avec soin</h1>
+          <h1>Choisissez des pièces de luxe à petit prix</h1>
           <p>
             Decouvrez notre selection d'objets lifestyle et deco. Une boutique pensee pour
             celles et ceux qui aiment la qualite et le design.
