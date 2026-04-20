@@ -86,6 +86,7 @@ body {
   margin: auto;
   padding: 3rem 0 4rem;
   max-width: 700px;
+  text-align: center;
 }
 
 .hero-logo {
@@ -98,7 +99,7 @@ body {
   border: none;
   background: transparent;
   display: block;
-  margin: 0.6rem auto 0.9rem;
+  margin: 0.6rem auto 0.2rem;
 }
 
 .badge {
@@ -121,10 +122,11 @@ h3 {
 h1 {
   font-family: var(--font-display), "Times New Roman", serif;
   font-size: clamp(1.15rem, 2.6vw, 2.4rem);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   white-space: nowrap;
   text-wrap: nowrap;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 h2 {
