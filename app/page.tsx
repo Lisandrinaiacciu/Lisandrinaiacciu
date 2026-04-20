@@ -28,8 +28,8 @@ export default function Home() {
           />
           <h1>Choisissez des pièces de luxe à petit prix</h1>
           <p>
-            Decouvrez notre selection d'objets lifestyle et deco. Une boutique pensee pour
-            celles et ceux qui aiment la qualite et le design.
+            Découvrez notre séléction de pièces pour vous habiller comme vous le souhaitez à
+            petit prix.
           </p>
           <a className="btn" href="#produits">
             Voir les produits
