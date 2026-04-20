@@ -18,7 +18,6 @@ export default function Home() {
         </nav>
 
         <div className="hero-content container">
-          <p className="badge">Nouvelle collection 2026</p>
           <Image
             className="hero-logo"
             src="/logo.png"
