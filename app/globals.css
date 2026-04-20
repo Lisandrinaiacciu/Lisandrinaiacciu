@@ -257,15 +257,33 @@ h2 {
   border: 1px solid #d6deea;
 }
 
-.photo-a { background: linear-gradient(145deg, #ffe4e6, #fde68a); }
-.photo-b { background: linear-gradient(145deg, #e0f2fe, #dbeafe); }
-.photo-c { background: linear-gradient(145deg, #dcfce7, #bfdbfe); }
-.photo-d { background: linear-gradient(145deg, #fef9c3, #fde68a); }
-.photo-e { background: linear-gradient(145deg, #f5d0fe, #ddd6fe); }
-.photo-f { background: linear-gradient(145deg, #fed7aa, #fecdd3); }
-.photo-g { background: linear-gradient(145deg, #bae6fd, #c4b5fd); }
-.photo-h { background: linear-gradient(145deg, #bbf7d0, #99f6e4); }
-.photo-i { background: linear-gradient(145deg, #f5f5f4, #e2e8f0); }
+.photo-a {
+  background: linear-gradient(145deg, #ffe4e6, #fde68a);
+}
+.photo-b {
+  background: linear-gradient(145deg, #e0f2fe, #dbeafe);
+}
+.photo-c {
+  background: linear-gradient(145deg, #dcfce7, #bfdbfe);
+}
+.photo-d {
+  background: linear-gradient(145deg, #fef9c3, #fde68a);
+}
+.photo-e {
+  background: linear-gradient(145deg, #f5d0fe, #ddd6fe);
+}
+.photo-f {
+  background: linear-gradient(145deg, #fed7aa, #fecdd3);
+}
+.photo-g {
+  background: linear-gradient(145deg, #bae6fd, #c4b5fd);
+}
+.photo-h {
+  background: linear-gradient(145deg, #bbf7d0, #99f6e4);
+}
+.photo-i {
+  background: linear-gradient(145deg, #f5f5f4, #e2e8f0);
+}
 
 .price {
   font-weight: 700;
