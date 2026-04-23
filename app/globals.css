@@ -290,6 +290,15 @@ h2 {
   border: 1px solid #d6deea;
 }
 
+.product-photo-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-photo-image img {
+  object-fit: cover;
+}
+
 .photo-a {
   background: linear-gradient(145deg, #ffe4e6, #fde68a);
 }

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 type Product = {
-  photoClass: string;
+  photoClass?: string;
+  imageSrc?: string;
   name: string;
   description: string;
   price?: string;
@@ -101,6 +102,12 @@ const categories: Category[] = [
     title: "Vetements enfants 4 ans et +",
     description: "Exemple de produits avec photos et prix.",
     products: [
+      {
+        imageSrc: "/gucci-robe-rayure-7-ans.jpg",
+        name: "GUCCI Robe rayure",
+        description: "Taille 7 ans, comme neuve.",
+        price: "Prix sur demande",
+      },
       {
         photoClass: "photo-g",
         name: "Veste mi-saison",
@@ -246,7 +253,18 @@ export default function Home() {
                   <div className="product-list">
                     {category.products.map((product) => (
                       <article className="product-card" key={`${category.title}-${product.name}`}>
-                        <div className={`product-photo ${product.photoClass}`}>Photo produit</div>
+                        <div className={`product-photo ${product.imageSrc ? "product-photo-image" : product.photoClass ?? ""}`}>
+                          {product.imageSrc ? (
+                            <Image
+                              src={product.imageSrc}
+                              alt={product.name}
+                              fill
+                              sizes="(max-width: 680px) 33vw, (max-width: 980px) 50vw, 25vw"
+                            />
+                          ) : (
+                            "Photo produit"
+                          )}
+                        </div>
                         <h4>{product.name}</h4>
                         <p>{product.description}</p>
                         {product.oldPrice && product.newPrice ? (
