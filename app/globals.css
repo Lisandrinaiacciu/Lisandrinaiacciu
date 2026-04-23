@@ -293,10 +293,12 @@ h2 {
 .product-photo-image {
   position: relative;
   overflow: hidden;
+  background: #f8fafc;
 }
 
 .product-photo-image img {
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.35rem;
 }
 
 .photo-a {
