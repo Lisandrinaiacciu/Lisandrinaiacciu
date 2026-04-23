@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Product = {
   photoClass?: string;
@@ -106,7 +106,7 @@ const categories: Category[] = [
         imageSrc: "/gucci-robe-rayure-7-ans.png",
         name: "GUCCI Robe rayure",
         description: "Taille 7 ans, comme neuve.",
-        price: "Prix sur demande",
+        price: "50 EUR",
       },
       {
         photoClass: "photo-g",
@@ -132,6 +132,22 @@ const categories: Category[] = [
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!selectedImage) {
+      return;
+    }
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [selectedImage]);
 
   const normalizedSearch = searchQuery.trim().toLowerCase();
   const filteredCategories = useMemo(() => {
@@ -253,18 +269,23 @@ export default function Home() {
                   <div className="product-list">
                     {category.products.map((product) => (
                       <article className="product-card" key={`${category.title}-${product.name}`}>
-                        <div className={`product-photo ${product.imageSrc ? "product-photo-image" : product.photoClass ?? ""}`}>
-                          {product.imageSrc ? (
+                        {product.imageSrc ? (
+                          <button
+                            type="button"
+                            className="product-photo product-photo-image"
+                            onClick={() => setSelectedImage({ src: product.imageSrc ?? "", alt: product.name })}
+                            aria-label={`Voir ${product.name} en grand`}
+                          >
                             <Image
                               src={product.imageSrc}
                               alt={product.name}
                               fill
                               sizes="(max-width: 680px) 33vw, (max-width: 980px) 50vw, 25vw"
                             />
-                          ) : (
-                            "Photo produit"
-                          )}
-                        </div>
+                          </button>
+                        ) : (
+                          <div className={`product-photo ${product.photoClass ?? ""}`}>Photo produit</div>
+                        )}
                         <h4>{product.name}</h4>
                         <p>{product.description}</p>
                         {product.oldPrice && product.newPrice ? (
@@ -315,6 +336,37 @@ export default function Home() {
       <footer className="footer">
         <p>&copy; 2026 Lisandrinaiacciu - Tous droits reserves.</p>
       </footer>
+
+      {selectedImage ? (
+        <div
+          className="image-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Agrandissement de la photo produit"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="image-modal-content" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              className="image-modal-close"
+              onClick={() => setSelectedImage(null)}
+              aria-label="Fermer la photo"
+            >
+              Fermer
+            </button>
+            <div className="image-modal-image-wrap">
+              <Image
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                fill
+                sizes="100vw"
+                className="image-modal-image"
+              />
+            </div>
+            <p className="image-modal-caption">{selectedImage.alt}</p>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }

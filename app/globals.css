@@ -294,11 +294,65 @@ h2 {
   position: relative;
   overflow: hidden;
   background: #f8fafc;
+  cursor: zoom-in;
+  width: 100%;
+  border: 1px solid #d6deea;
+  padding: 0;
 }
 
 .product-photo-image img {
   object-fit: contain;
   padding: 0.35rem;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(2, 6, 23, 0.82);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.image-modal-content {
+  width: min(960px, 96vw);
+  max-height: 92vh;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.image-modal-close {
+  justify-self: end;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0.4rem 0.7rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.image-modal-image-wrap {
+  position: relative;
+  width: 100%;
+  height: min(78vh, 860px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.image-modal-image {
+  object-fit: contain;
+}
+
+.image-modal-caption {
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text);
 }
 
 .photo-a {
