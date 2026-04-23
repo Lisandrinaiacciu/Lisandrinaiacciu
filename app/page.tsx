@@ -1,6 +1,161 @@
-﻿import Image from "next/image";
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+
+type Product = {
+  photoClass: string;
+  name: string;
+  description: string;
+  price?: string;
+  oldPrice?: string;
+  newPrice?: string;
+};
+
+type Category = {
+  title: string;
+  description: string;
+  className?: string;
+  products: Product[];
+};
+
+const categories: Category[] = [
+  {
+    title: "Destockage",
+    description: "Dernieres pieces a prix reduits.",
+    className: "destockage",
+    products: [
+      {
+        photoClass: "photo-b",
+        name: "Gilet maille enfant",
+        description: "Serie limitee, fin de collection.",
+        oldPrice: "34.90 EUR",
+        newPrice: "19.90 EUR",
+      },
+      {
+        photoClass: "photo-f",
+        name: "Ensemble bebe coton",
+        description: "Confort premium, dernieres tailles.",
+        oldPrice: "29.90 EUR",
+        newPrice: "16.90 EUR",
+      },
+      {
+        photoClass: "photo-h",
+        name: "Veste coupe-vent junior",
+        description: "Modele leger et resistant.",
+        oldPrice: "49.90 EUR",
+        newPrice: "27.90 EUR",
+      },
+    ],
+  },
+  {
+    title: "Vetements bebe 0-18 mois",
+    description: "Exemple de produits avec photos et prix.",
+    products: [
+      {
+        photoClass: "photo-a",
+        name: "Body coton doux",
+        description: "Lot de 2 bodies manches longues.",
+        price: "19.90 EUR",
+      },
+      {
+        photoClass: "photo-b",
+        name: "Pyjama nuage",
+        description: "Ouverture pratique, tissu respirant.",
+        price: "24.90 EUR",
+      },
+      {
+        photoClass: "photo-c",
+        name: "Ensemble naissance",
+        description: "Bonnet, gilet et pantalon assortis.",
+        price: "29.90 EUR",
+      },
+    ],
+  },
+  {
+    title: "Vetements enfant 24-36 mois",
+    description: "Exemple de produits avec photos et prix.",
+    products: [
+      {
+        photoClass: "photo-d",
+        name: "Sweat zip enfant",
+        description: "Confort quotidien, coupe mixte.",
+        price: "27.90 EUR",
+      },
+      {
+        photoClass: "photo-e",
+        name: "Jean souple",
+        description: "Taille elastique, denim doux.",
+        price: "22.90 EUR",
+      },
+      {
+        photoClass: "photo-f",
+        name: "Robe fleurie",
+        description: "Legere et facile a entretenir.",
+        price: "25.90 EUR",
+      },
+    ],
+  },
+  {
+    title: "Vetements enfants 4 ans et +",
+    description: "Exemple de produits avec photos et prix.",
+    products: [
+      {
+        photoClass: "photo-g",
+        name: "Veste mi-saison",
+        description: "Protection legere pour l'ecole.",
+        price: "39.90 EUR",
+      },
+      {
+        photoClass: "photo-h",
+        name: "T-shirt graphique",
+        description: "Impression durable, coton epais.",
+        price: "14.90 EUR",
+      },
+      {
+        photoClass: "photo-i",
+        name: "Pantalon cargo",
+        description: "Coupe moderne et poches pratiques.",
+        price: "31.90 EUR",
+      },
+    ],
+  },
+];
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+  const filteredCategories = useMemo(() => {
+    if (!normalizedSearch) {
+      return categories;
+    }
+
+    return categories
+      .map((category) => {
+        const products = category.products.filter((product) => {
+          const searchableText = [
+            category.title,
+            product.name,
+            product.description,
+            product.price,
+            product.oldPrice,
+            product.newPrice,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+          return searchableText.includes(normalizedSearch);
+        });
+
+        return { ...category, products };
+      })
+      .filter((category) => category.products.length > 0);
+  }, [normalizedSearch]);
+
+  const hasResults = filteredCategories.length > 0;
+
   return (
     <>
       <header className="hero" id="accueil">
@@ -14,6 +169,7 @@ export default function Home() {
             <a href="#presentation">Presentation</a>
             <a href="#produits">Produits</a>
             <a href="#contact">Contact</a>
+            <Link href="/personnalisations">Personnalisations</Link>
           </div>
         </nav>
 
@@ -26,10 +182,8 @@ export default function Home() {
             height={430}
             priority
           />
-          <h1>Choisissez des pièces de luxe à petit prix</h1>
-          <p>
-            Découvrez notre séléction de pièces dont vous rêver à prix de rêve.
-          </p>
+          <h1>Choisissez des pieces de luxe a petit prix</h1>
+          <p>Decouvrez notre selection de pieces dont vous revez a prix de reve.</p>
           <a className="btn" href="#produits">
             Voir les produits
           </a>
@@ -43,17 +197,16 @@ export default function Home() {
             <article>
               <h3>Nos lives Whatnot</h3>
               <p>
-                Depuis Janvier 2026 notre site internet est retranscrit trois fois par semaine
-                via des lives effectués sur Whatnot. Vous y trouverez les pièces présentées ci
-                dessous. N'hesitez pas à demander de passer une pièce qui vous interesse lors des
-                lives
+                Depuis Janvier 2026 notre site internet est retranscrit trois fois par semaine via des
+                lives effectues sur Whatnot. Vous y trouverez les pieces presentees ci dessous.
+                N&apos;hesitez pas a demander de passer une piece qui vous interesse lors des lives
               </p>
             </article>
             <article>
               <h3>Notre promesse</h3>
               <p>
-                Une selection courte, des pieces choisies a la main et un service client
-                attentif. Chaque produit est teste avant d'arriver en rayon.
+                Une selection courte, des pieces choisies a la main et un service client attentif.
+                Chaque produit est teste avant d&apos;arriver en rayon.
               </p>
             </article>
           </div>
@@ -62,123 +215,53 @@ export default function Home() {
         <section className="section section-alt" id="produits">
           <div className="container">
             <h2>Produits</h2>
+            <div className="product-search-box">
+              <label htmlFor="product-search">Rechercher un article</label>
+              <input
+                id="product-search"
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Ex: pyjama, robe, veste..."
+                aria-label="Rechercher un article"
+              />
+            </div>
+
+            {!hasResults ? (
+              <p className="search-empty">
+                Aucun article ne correspond a &quot;{searchQuery.trim()}&quot;.
+              </p>
+            ) : null}
+
             <div className="categories-stack">
-              <article className="category-block destockage">
-                <div className="category-head">
-                  <h3>Destockage</h3>
-                  <p>Dernieres pieces a prix reduits.</p>
-                </div>
-                <div className="product-list">
-                  <article className="product-card">
-                    <div className="product-photo photo-b">Photo produit</div>
-                    <h4>Gilet maille enfant</h4>
-                    <p>Serie limitee, fin de collection.</p>
-                    <div className="deal-line">
-                      <span className="old-price">34.90 EUR</span>
-                      <span className="new-price">19.90 EUR</span>
-                    </div>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-f">Photo produit</div>
-                    <h4>Ensemble bebe coton</h4>
-                    <p>Confort premium, dernieres tailles.</p>
-                    <div className="deal-line">
-                      <span className="old-price">29.90 EUR</span>
-                      <span className="new-price">16.90 EUR</span>
-                    </div>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-h">Photo produit</div>
-                    <h4>Veste coupe-vent junior</h4>
-                    <p>Modele leger et resistant.</p>
-                    <div className="deal-line">
-                      <span className="old-price">49.90 EUR</span>
-                      <span className="new-price">27.90 EUR</span>
-                    </div>
-                  </article>
-                </div>
-              </article>
-
-              <article className="category-block">
-                <div className="category-head">
-                  <h3>Vetements bebe 0-18 mois</h3>
-                  <p>Exemple de produits avec photos et prix.</p>
-                </div>
-                <div className="product-list">
-                  <article className="product-card">
-                    <div className="product-photo photo-a">Photo produit</div>
-                    <h4>Body coton doux</h4>
-                    <p>Lot de 2 bodies manches longues.</p>
-                    <span className="price">19.90 EUR</span>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-b">Photo produit</div>
-                    <h4>Pyjama nuage</h4>
-                    <p>Ouverture pratique, tissu respirant.</p>
-                    <span className="price">24.90 EUR</span>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-c">Photo produit</div>
-                    <h4>Ensemble naissance</h4>
-                    <p>Bonnet, gilet et pantalon assortis.</p>
-                    <span className="price">29.90 EUR</span>
-                  </article>
-                </div>
-              </article>
-
-              <article className="category-block">
-                <div className="category-head">
-                  <h3>Vetements enfant 24-36 mois</h3>
-                  <p>Exemple de produits avec photos et prix.</p>
-                </div>
-                <div className="product-list">
-                  <article className="product-card">
-                    <div className="product-photo photo-d">Photo produit</div>
-                    <h4>Sweat zip enfant</h4>
-                    <p>Confort quotidien, coupe mixte.</p>
-                    <span className="price">27.90 EUR</span>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-e">Photo produit</div>
-                    <h4>Jean souple</h4>
-                    <p>Taille elastique, denim doux.</p>
-                    <span className="price">22.90 EUR</span>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-f">Photo produit</div>
-                    <h4>Robe fleurie</h4>
-                    <p>Legere et facile a entretenir.</p>
-                    <span className="price">25.90 EUR</span>
-                  </article>
-                </div>
-              </article>
-
-              <article className="category-block">
-                <div className="category-head">
-                  <h3>Vetements enfants 4 ans et +</h3>
-                  <p>Exemple de produits avec photos et prix.</p>
-                </div>
-                <div className="product-list">
-                  <article className="product-card">
-                    <div className="product-photo photo-g">Photo produit</div>
-                    <h4>Veste mi-saison</h4>
-                    <p>Protection legere pour l'ecole.</p>
-                    <span className="price">39.90 EUR</span>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-h">Photo produit</div>
-                    <h4>T-shirt graphique</h4>
-                    <p>Impression durable, coton epais.</p>
-                    <span className="price">14.90 EUR</span>
-                  </article>
-                  <article className="product-card">
-                    <div className="product-photo photo-i">Photo produit</div>
-                    <h4>Pantalon cargo</h4>
-                    <p>Coupe moderne et poches pratiques.</p>
-                    <span className="price">31.90 EUR</span>
-                  </article>
-                </div>
-              </article>
+              {filteredCategories.map((category) => (
+                <article
+                  className={`category-block ${category.className ?? ""}`.trim()}
+                  key={category.title}
+                >
+                  <div className="category-head">
+                    <h3>{category.title}</h3>
+                    <p>{category.description}</p>
+                  </div>
+                  <div className="product-list">
+                    {category.products.map((product) => (
+                      <article className="product-card" key={`${category.title}-${product.name}`}>
+                        <div className={`product-photo ${product.photoClass}`}>Photo produit</div>
+                        <h4>{product.name}</h4>
+                        <p>{product.description}</p>
+                        {product.oldPrice && product.newPrice ? (
+                          <div className="deal-line">
+                            <span className="old-price">{product.oldPrice}</span>
+                            <span className="new-price">{product.newPrice}</span>
+                          </div>
+                        ) : (
+                          <span className="price">{product.price}</span>
+                        )}
+                      </article>
+                    ))}
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -186,8 +269,7 @@ export default function Home() {
         <section className="section container" id="contact">
           <h2>Contact</h2>
           <p className="contact-intro">
-            Une question ou une commande specifique? Ecrivez-nous, nous vous repondons sous
-            24h.
+            Une question ou une commande specifique? Ecrivez-nous, nous vous repondons sous 24h.
           </p>
           <form className="contact-form" action="#" method="post">
             <label htmlFor="nom">Nom</label>
