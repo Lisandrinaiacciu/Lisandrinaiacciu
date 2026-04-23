@@ -103,7 +103,7 @@ const categories: Category[] = [
     description: "Exemple de produits avec photos et prix.",
     products: [
       {
-        imageSrc: "/gucci-robe-rayure-7-ans.jpg",
+        imageSrc: "/gucci-robe-rayure-7-ans.png",
         name: "GUCCI Robe rayure",
         description: "Taille 7 ans, comme neuve.",
         price: "Prix sur demande",
