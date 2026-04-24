@@ -75,6 +75,48 @@ const categories: Category[] = [
     ],
   },
   {
+    title: "Bebe 3 mois",
+    description: "Selection de photos pour la categorie bebe 3 mois.",
+    products: [
+      {
+        imageSrc: "/bebe-3-mois-1.png",
+        name: "Bebe 3 mois - Photo 1",
+        description: "Modele disponible en live.",
+        price: "Prix en live",
+      },
+      {
+        imageSrc: "/bebe-3-mois-2.png",
+        name: "Bebe 3 mois - Photo 2",
+        description: "Modele disponible en live.",
+        price: "Prix en live",
+      },
+      {
+        imageSrc: "/bebe-3-mois-3.png",
+        name: "Bebe 3 mois - Photo 3",
+        description: "Modele disponible en live.",
+        price: "Prix en live",
+      },
+      {
+        imageSrc: "/bebe-3-mois-4.png",
+        name: "Bebe 3 mois - Photo 4",
+        description: "Modele disponible en live.",
+        price: "Prix en live",
+      },
+      {
+        imageSrc: "/bebe-3-mois-5.png",
+        name: "Bebe 3 mois - Photo 5",
+        description: "Modele disponible en live.",
+        price: "Prix en live",
+      },
+      {
+        imageSrc: "/bebe-3-mois-6.png",
+        name: "Bebe 3 mois - Photo 6",
+        description: "Modele disponible en live.",
+        price: "Prix en live",
+      },
+    ],
+  },
+  {
     title: "Vetements enfant 24-36 mois",
     description: "Exemple de produits avec photos et prix.",
     products: [
